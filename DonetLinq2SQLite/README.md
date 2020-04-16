@@ -13,7 +13,8 @@
 ```Xml
   <entityFramework>
     <providers>
-      <provider invariantName="System.Data.SQLite" type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6" />
+      <provider invariantName="System.Data.SQLite" 
+		type="System.Data.SQLite.EF6.SQLiteProviderServices, System.Data.SQLite.EF6" />
     </providers>
   </entityFramework>
 ```
@@ -23,7 +24,8 @@
   <connectionStrings>
     <!-- name 属性表示此数据库连接字符串配置的名称，会在创建DbContext()时用到-->
 	<!-- connectionString 字段表示此数据库连接配置信息，包括服务器和数据库路径/名称、用户名、密码等-->
-    <add name="DotNetSQLiteDB" connectionString="DATA SOURCE=SQLiteDB.db" providerName="System.Data.SQLite" />
+    <add name="DotNetSQLiteDB" connectionString="DATA SOURCE=SQLiteDB.db" 
+	 providerName="System.Data.SQLite" />
   </connectionStrings>
 ```
 
@@ -268,9 +270,19 @@ namespace DonetLinq2SQLite
             Console.WriteLine("——————\n上车：");
             //直接向bus增加person
             Bus bus = DBContext.BusSet.First(b => b.ID == 2);
-            bus.Persons.Add(new Person() { Name = "新上车乘客", Password = "p@ssword", Telephone = "+86-12345678910" });
+            bus.Persons.Add(new Person() 
+	    { 
+	    	Name = "新上车乘客", 
+	    	Password = "p@ssword", 
+		Telephone = "+86-12345678910" 
+	    });
             //先储存person，再加入bus
-            Person person = new Person() { Name = "另一个新上车乘客", Password = "Ap@ssword", Telephone = "+86-12345678911" };
+            Person person = new Person() 
+	    { 
+	    	Name = "另一个新上车乘客", 
+		Password = "Ap@ssword", 
+		Telephone = "+86-12345678911" 
+	    };
             DBContext.PersonSet.Add(person);
             bus.Persons.Add(person);
             //储存更改
