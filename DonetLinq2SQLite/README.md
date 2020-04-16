@@ -1,13 +1,13 @@
 # 创建 .NetFramework 项目
 
-## 添加Nuget包：
->-	EntityFramework (强大的ORM框架)
->-	EntityFramework.zh-Hans (EntityFramework中文支持)
->-	System.Data.SQLite (SQLite组件)
->-	SQLite.CodeFirst (EF框架暂不支持SQLite数据库的CodeFirst模式，所以需要此额外的包)
->-	System.Data.SQLite.Core (由System.Data.SQLite依赖安装)
->-	System.Data.SQLite.EF6 (由System.Data.SQLite依赖安装)
->-	System.Data.SQLite.Linq (由System.Data.SQLite依赖安装)
+## 添加 Nuget 包：
+>-	EntityFramework (强大的 ORM 框架)
+>-	EntityFramework.zh-Hans (EntityFramework 中文支持)
+>-	System.Data.SQLite (SQLite 组件)
+>-	SQLite.CodeFirst (EF 框架暂不支持 SQLite 数据库的 CodeFirst 模式，所以需要此额外的包)
+>-	System.Data.SQLite.Core (由 System.Data.SQLite 依赖安装)
+>-	System.Data.SQLite.EF6 (由 System.Data.SQLite 依赖安装)
+>-	System.Data.SQLite.Linq (由 System.Data.SQLite 依赖安装)
 
 ## 配置 App.config
 ```Xml
@@ -126,12 +126,12 @@ namespace DonetLinq2SQLite.Models
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(typeof(SQLiteDBContext).Assembly);
 
-            //初始化数据种子，用于CodeFirst模式自动创建或修改数据库
+            //初始化数据种子，用于 CodeFirst 模式自动创建或修改数据库
             Database.SetInitializer(new SampleData(modelBuilder));
         }
     }
 }
-```C#
+```
 >- ——————————————————
 
 >-  创建数据库初始化种子
@@ -225,7 +225,8 @@ namespace DonetLinq2SQLite.Models
 ```
 > ——————————————————
 
-## 应用：增删改查：
+## 应用：
+### 增删改查：
 ```C#
 using DonetLinq2SQLite.Models;
 using System;
@@ -242,10 +243,10 @@ namespace DonetLinq2SQLite
         {
             SQLiteDBContext DBContext = new SQLiteDBContext();
 
-            Console.WriteLine("有两个乘客的BUS : " + 
+            Console.WriteLine("有两个乘客的 BUS : " + 
                 DBContext.BusSet.FirstOrDefault(b => b.Persons.Count == 2).Name);
 
-            Console.WriteLine("——————\n输出车辆信息：");
+            Console.WriteLine("——————\n 输出车辆信息：");
             foreach (Bus b in DBContext.BusSet.ToArray())
             {
                 Console.WriteLine(string.Format(
@@ -256,7 +257,7 @@ namespace DonetLinq2SQLite
                 ));
             }
 
-            Console.WriteLine("——————\n输出乘客信息：");
+            Console.WriteLine("——————\n 输出乘客信息：");
             foreach (Person p in DBContext.PersonSet.ToArray())
             {
                 Console.WriteLine(string.Format(
@@ -267,8 +268,8 @@ namespace DonetLinq2SQLite
                 ));
             }
 
-            Console.WriteLine("——————\n上车：");
-            //直接向bus增加person
+            Console.WriteLine("——————\n 上车：");
+            //直接向 bus 增加 person
             Bus bus = DBContext.BusSet.First(b => b.ID == 2);
             bus.Persons.Add(new Person() 
 	    { 
@@ -288,7 +289,7 @@ namespace DonetLinq2SQLite
             //储存更改
             DBContext.SaveChanges();
 
-            Console.WriteLine("——————\n输出车上乘客信息：");
+            Console.WriteLine("——————\n 输出车上乘客信息：");
             foreach (Person p in DBContext.BusSet.First(b => b.ID == 2).Persons)
             {
                 Console.WriteLine(string.Format(
@@ -299,13 +300,13 @@ namespace DonetLinq2SQLite
                 ));
             }
             
-            Console.WriteLine("——————\n下车：");
+            Console.WriteLine("——————\n 下车：");
             bus.Persons.RemoveAt(0);
             bus.Persons.RemoveAt(2);
             bus.Persons.Last().Name = "最后一个上车乘客";
             DBContext.SaveChanges();
 
-            Console.WriteLine("——————\n输出车上乘客信息：");
+            Console.WriteLine("——————\n 输出车上乘客信息：");
             foreach (Person p in DBContext.BusSet.First(b => b.ID == 2).Persons)
             {
                 Console.WriteLine(string.Format(
