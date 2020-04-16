@@ -30,8 +30,8 @@
 ```
 
 ## 创建实体类
-- /Models/Bus.cs
-- ——————————————————
+>- /Models/Bus.cs
+>- ——————————————————
 ```C#
 using System.Collections.Generic;
 using System.ComponentModel;
